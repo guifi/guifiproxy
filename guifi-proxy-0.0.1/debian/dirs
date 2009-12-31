@@ -1,0 +1,3 @@
+etc/guifi-proxy
+usr/share/guifi-proxy
+var/log/guifi-proxy
