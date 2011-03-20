@@ -1,9 +1,0 @@
-Package: guifi-proxy
-Version: 0.0.1-1
-Architecture: all
-Maintainer: Carles Guadall Blancafort <carles@viladelpingui.net>
-Installed-Size: 112
-Depends: debconf (>= 0.5) | debconf-2.0, squid, sarg, wget, coreutils
-Section: web
-Priority: optional
-Description: Guifi.net Proxy federation system.

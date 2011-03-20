@@ -1,8 +1,0 @@
-/var/log/guifi-proxy/guifi-proxy.log {
-	daily
-	missingok
-	rotate 7
-	compress
-#	notifempty
-	create 640 root root
-}
