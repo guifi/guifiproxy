@@ -1,0 +1,28 @@
+Format: 1.8
+Date: Sun, 21 Sep 2008 18:05:57 +0200
+Source: guifi-proxy
+Binary: guifi-proxy
+Architecture: source all
+Version: 0.0.2
+Distribution: unstable
+Urgency: low
+Maintainer: Carles Guadall Blancafort <carles@viladelpingui.net>
+Changed-By: Carles Guadall Blancafort <carles@viladelpingui.net>
+Description: 
+ guifi-proxy - Guifi.net Proxy federation system.
+Changes: 
+ guifi-proxy (0.0.2) unstable; urgency=low
+ .
+   * New URL for passwords and md5 hash
+Checksums-Sha1: 
+ f4374d0c546924cabe4ae9ebcb8c55973de78b14 489 guifi-proxy_0.0.2.dsc
+ 2933f7449ab3e701b18664e7cfb7d529ef30cb0e 6817 guifi-proxy_0.0.2.tar.gz
+ 398ebd5c22472d8d73c5439f323fdc330301f6d8 4476 guifi-proxy_0.0.2_all.deb
+Checksums-Sha256: 
+ 16f5512770d03645cf96540f1899ba09bd892d1c11921e8ccb62c5153498bcbe 489 guifi-proxy_0.0.2.dsc
+ 8676027b99d96cd1d594969559de9c047213d3d4b71d0a130e879e2f5c06785c 6817 guifi-proxy_0.0.2.tar.gz
+ b75d0adf445dd212c62d511b6b963e5f4cbf3b9c44fa241ae8a1ee911b7458b4 4476 guifi-proxy_0.0.2_all.deb
+Files: 
+ 42b44c2a0f4aae3b23d67d90941fcf86 489 web optional guifi-proxy_0.0.2.dsc
+ 78f26c2f6658725adcd4f33cf92fcc01 6817 web optional guifi-proxy_0.0.2.tar.gz
+ 6ab047863fb1e8ab4dccca68027bbd36 4476 web optional guifi-proxy_0.0.2_all.deb

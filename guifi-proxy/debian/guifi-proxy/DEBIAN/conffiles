@@ -1,2 +1,2 @@
-/etc/cron.d/guifi-proxy
 /etc/logrotate.d/guifi-proxy
+/etc/cron.d/guifi-proxy

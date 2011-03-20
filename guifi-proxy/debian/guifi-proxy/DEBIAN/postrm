@@ -1,5 +1,5 @@
 #! /bin/sh
-# prerm script for snpservices
+# postrm script for snpservices
 #
 # see: dh_installdeb(1)
 
