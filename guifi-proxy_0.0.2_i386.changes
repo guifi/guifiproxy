@@ -1,0 +1,32 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Format: 1.7
+Date: Sun, 21 Sep 2008 18:05:57 +0200
+Source: guifi-proxy
+Binary: guifi-proxy
+Architecture: source all
+Version: 0.0.2
+Distribution: unstable
+Urgency: low
+Maintainer: Carles Guadall Blancafort <carles@viladelpingui.net>
+Changed-By: Carles Guadall Blancafort <carles@viladelpingui.net>
+Description: 
+ guifi-proxy - Guifi.net Proxy federation system.
+Changes: 
+ guifi-proxy (0.0.2) unstable; urgency=low
+ .
+   * New URL for passwords and md5 hash
+Files: 
+ 9fa7366c246d30e0944ba49152ea3985 591 web optional guifi-proxy_0.0.2.dsc
+ f2859b56e53e2aaa86f4dba60b8562f6 506 web optional guifi-proxy_0.0.2.orig.tar.gz
+ 5e818b097b0e432b8a5d6e038562ab53 6584 web optional guifi-proxy_0.0.2.diff.gz
+ 3cd30dd5edabb94d47c313d248c2e9bd 4852 web optional guifi-proxy_0.0.2_all.deb
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.6 (GNU/Linux)
+
+iD8DBQFI1nR6vSQMXUGC0kgRAq2cAKDQDzBuS9WJTET9dD4nNQNjSvOlEgCfZy4y
+833AWbL7klsz76QMNYqzmx0=
+=aDB5
+-----END PGP SIGNATURE-----
