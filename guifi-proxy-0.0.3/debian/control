@@ -1,0 +1,12 @@
+Source: guifi-proxy
+Section: web
+Priority: optional
+Maintainer: Carles Guadall Blancafort <carles@viladelpingui.net>
+Build-Depends: cdbs, debhelper (>= 5)
+Standards-Version: 3.7.2
+
+Package: guifi-proxy
+Architecture: all
+Depends: ${misc:Depends}, squid, sarg, wget, coreutils
+Description: Guifi.net Proxy federation system.
+
