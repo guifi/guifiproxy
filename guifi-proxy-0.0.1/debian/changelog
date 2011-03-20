@@ -1,3 +1,9 @@
+guifi-proxy (0.0.2) unstable; urgency=low
+
+  * New URL for passwords and md5 hash
+
+ -- Carles Guadall Blancafort <carles@viladelpingui.net>  Sun, 21 Sep 2008 18:05:57 +0200
+
 guifi-proxy (0.0.1-1) unstable; urgency=low
 
   * Initial release

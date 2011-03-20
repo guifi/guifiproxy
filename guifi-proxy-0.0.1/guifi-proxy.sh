@@ -1,64 +1,26 @@
 #!/bin/sh
-
-#--- DEFAULT CONFIG ---
-node=2619; # overwrite by config file
-base_url='http://www.guifi.net'
-passwd_dir='/etc/guifi-proxy/'
-passwd=${passwd_dir}'passwd'
-passwd_md5=${passwd_dir}'passwd.md5'
-tmp='/tmp/passwd'
-tmp_md5='/tmp/passwd.md5'
-tmp_web_md5='/tmp/passwd_web_md5.txt'
-# Enable for Debian/Ubuntu 
+#--- CONFIG ---
+node=4282;
+passwd_dir=/tmp/etc/
+passwd=${passwd_dir}passwd
+tmp=/tmp/passwd
+# Debian/Ubuntu Reload
 reload='/etc/init.d/squid reload'
-# Enable for Fedora/RedHat
+# Fedora/RedHat Reload
 #reload='service squid reload'
-#--- END DEFAULT CONFIG ---
 
-#--- LOAD CONFIG FILE ---
-config='/etc/guifi-proxy/config.sh'
-
-if [ -f $config ]
-  then
-  . $config
-fi
-#--- END LOAD CONFIG FILE ---
-
-#echo $node;
-#echo $base_url;
-#echo $passwd_dir;
-#echo $passwd;
-#echo $tmp;
-#echo $reload;
-
-
-# Check if download passwd file is needed
-# Download md5 checksum
-wget $base_url/ca/node/$node/view/federated_md5 -O $tmp_web_md5
-# Calc md5sum of $passwd
+#--- END CONFIG ---
+wget http://www.guifi.net/guifi/export/$node/federated -qO $tmp
 touch $passwd
-md5sum $passwd > $passwd_md5
 
-# Compare checksums
-hash_web=`cut -d" " -f1 $tmp_web_md5`
-hash_passwd=`cut -d" " -f1 $passwd_md5`
-#echo "md5=$hash_web="
-#echo "md5=$hash_passwd="
+NEW=`diff $passwd $tmp|wc -l`
+echo $NEW
+OK=`grep Federated $tmp|wc -l`
 
-if [ $hash_web != $hash_passwd ]; then
-  echo "[`date -R`] - Different Hash, New Passwd File";
-  wget $base_url/ca/node/$node/view/federated -O $tmp
-  md5sum $tmp > $tmp_md5
-  hash_tmp=`cut -d" " -f1 $tmp_md5`  
-  if [ $hash_web = $hash_tmp ]; then
-    echo "[`date -R`] - Download OK, copying Passwd file to $passwd";
-    cp $tmp $passwd
-    rm $tmp
-    rm $tmp_md5
-    rm $tmp_web_md5
+if [ $OK != "0" ]; then
+ if [ $NEW != "0" ]; then
+    cp $tmp $passwd_dir
     $reload
-  fi;  
-fi;
-
-exit 0;
-
+    echo "Nou $passwd copiat"
+ fi;
+fi
