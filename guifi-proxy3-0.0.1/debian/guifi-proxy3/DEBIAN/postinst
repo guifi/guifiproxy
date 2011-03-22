@@ -1,0 +1,63 @@
+#! /bin/sh
+#
+# $Id$ 
+#
+
+set -e
+
+configfile='/etc/guifi-proxy/config.sh';
+tmpfile=`/bin/tempfile -m 644`;
+
+case $1 in
+	configure|reconfigure)
+
+	. /usr/share/debconf/confmodule
+	db_version 2.0 || [ $? -lt 30 ]
+
+	db_get guifi-proxy/baseurl
+	base_url=$RET
+	db_get guifi-proxy/node
+	node=$RET
+	db_get guifi-proxy/forcefetch
+	forcefetch=$RET
+
+
+	/bin/cat << EOT > $tmpfile
+
+#!/bin/sh
+#
+# Script at /usr/share/guifi-proxy
+#
+# Server base url ex: http://www.guifi.net
+base_url='$base_url';
+# Node ID
+node=$node;
+
+EOT
+
+	/usr/bin/ucf --three-way --debconf-ok $tmpfile $configfile
+	/bin/rm $tmpfile
+
+	if [ $forcefetch ]
+	then
+		echo "Fetching passwd file.";
+		if [ -x /usr/share/guifi-proxy/guifi-proxy.sh ]; then echo "..."; /usr/share/guifi-proxy/guifi-proxy.sh; fi
+	fi
+	# Force logrotate
+	touch /var/log/guifi-proxy/guifi-proxy.log
+	/usr/sbin/logrotate -f /etc/logrotate.d/guifi-proxy
+
+  exit 0
+  /etc/init.d/squid start
+	;;
+
+	*)
+		echo "postinst called with unknown argument \`$1'" 1>&2
+		exit 1
+		;;
+esac
+
+
+
+exit 0
+

@@ -1,0 +1,3 @@
+/etc/logrotate.d/guifi-proxy3
+/etc/cron.d/guifi-proxy3
+/etc/squid/squid.conf

@@ -1,0 +1,2 @@
+guifi-proxy.sh /usr/share/guifi-proxy/
+squid.conf /etc/squid/
