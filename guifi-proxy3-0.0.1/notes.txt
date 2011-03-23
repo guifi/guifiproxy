@@ -1,4 +1,0 @@
-Falta fer...
-
-Solucionar problema amb postinstal
-Adaptar el fitxer de squid3, ara tinc el de squid

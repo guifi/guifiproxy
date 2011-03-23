@@ -1,5 +1,0 @@
-#!/bin/bash
-if [ -e "../squid.conf" ]
-then
-        /bin/mv ../squid.conf ../squid.conf.backup	
-fi
