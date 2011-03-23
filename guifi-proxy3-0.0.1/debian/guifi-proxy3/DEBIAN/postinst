@@ -5,7 +5,7 @@
 
 set -e
 
-configfile='/etc/guifi-proxy/config.sh';
+configfile='/etc/guifi-proxy3/config.sh';
 tmpfile=`/bin/tempfile -m 644`;
 
 case $1 in
@@ -14,11 +14,11 @@ case $1 in
 	. /usr/share/debconf/confmodule
 	db_version 2.0 || [ $? -lt 30 ]
 
-	db_get guifi-proxy/baseurl
+	db_get guifi-proxy3/baseurl
 	base_url=$RET
-	db_get guifi-proxy/node
+	db_get guifi-proxy3/node
 	node=$RET
-	db_get guifi-proxy/forcefetch
+	db_get guifi-proxy3/forcefetch
 	forcefetch=$RET
 
 
@@ -26,7 +26,7 @@ case $1 in
 
 #!/bin/sh
 #
-# Script at /usr/share/guifi-proxy
+# Script at /usr/share/guifi-proxy3
 #
 # Server base url ex: http://www.guifi.net
 base_url='$base_url';
@@ -41,14 +41,22 @@ EOT
 	if [ $forcefetch ]
 	then
 		echo "Fetching passwd file.";
-		if [ -x /usr/share/guifi-proxy/guifi-proxy.sh ]; then echo "..."; /usr/share/guifi-proxy/guifi-proxy.sh; fi
+		if [ -x /usr/share/guifi-proxy3/guifi-proxy3.sh ]; then echo "..."; /usr/share/guifi-proxy3/guifi-proxy3.sh; fi
 	fi
 	# Force logrotate
-	touch /var/log/guifi-proxy/guifi-proxy.log
-	/usr/sbin/logrotate -f /etc/logrotate.d/guifi-proxy
+	touch /var/log/guifi-proxy3/guifi-proxy3.log
+	/usr/sbin/logrotate -f /etc/logrotate.d/guifi-proxy3
 
-  exit 0
-  /etc/init.d/squid start
+        if [ -e "/etc/squid3/squid.conf" ]; then
+		echo "Saving a copy of the current squid.conf ........ ...... squid.conf.backup.initial";
+                /bin/mv /etc/squid3/squid.conf /etc/squid3/squid.conf.backup.initial
+        fi
+	echo "Loading special version Guifi.net ";
+        /bin/mv /tmp/squid.conf /etc/squid3/squid.conf
+	echo "Starting the Squid proxy server ...... .......";
+	/etc/init.d/squid start
+	echo "Enjoy it !";
+	exit 0
 	;;
 
 	*)
@@ -60,4 +68,3 @@ esac
 
 
 exit 0
-

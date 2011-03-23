@@ -16,14 +16,12 @@ set -e
 
 case "$1" in
     install|upgrade)
-	if [ -e "/etc/squid3/squid.conf" ]
-	then
-		/bin/mv /etc/squid3/squid.conf /etc/squid3/squid.conf.configuration.backup
-	fi
+	echo "Stopping the Squid proxy server ...... ...... .......";
 	/etc/init.d/squid stop
 	;;
 
     abort-upgrade)
+	/etc/init.d/squid start
     ;;
 
     *)

@@ -1,0 +1,16 @@
+#!/bin/sh -e
+
+. /usr/share/debconf/confmodule
+
+MY_ARCH=`dpkg --print-architecture`
+
+if [ "$1" = configure -o "$1" = reconfigure ] ; then
+
+	db_input high guifi-proxy3/baseurl || true
+	db_input high guifi-proxy3/node || true
+	db_input high guifi-proxy3/forcefetch || true
+	db_go
+
+fi
+
+exit 0

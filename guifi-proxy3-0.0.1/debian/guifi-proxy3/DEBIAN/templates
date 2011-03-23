@@ -1,0 +1,13 @@
+Template: guifi-proxy3/baseurl
+Type: string
+Default: http://www.guifi.net
+Description: Server base_url.
+
+Template: guifi-proxy3/node
+Type: string
+Description: Guifi Proxy node number.
+
+Template: guifi-proxy3/forcefetch
+Type: boolean
+Default: true
+Description: Force to fetch passwd file now.
