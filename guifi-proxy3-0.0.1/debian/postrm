@@ -30,7 +30,7 @@ case "$1" in
 			/bin/mv /etc/squid3/squid.conf.backup.initial /etc/squid3/squid.conf
 		fi
 		echo "Starting the server squid ...... .......";
-		/etc/init.d/squid reload 
+		/etc/init.d/squid3 reload 
 
                 ;;
 

@@ -17,11 +17,11 @@ set -e
 case "$1" in
     install|upgrade)
 	echo "Stopping the Squid proxy server ...... ...... .......";
-	/etc/init.d/squid stop
+	/etc/init.d/squid3 stop
 	;;
 
     abort-upgrade)
-	/etc/init.d/squid start
+	/etc/init.d/squid3 start
     ;;
 
     *)

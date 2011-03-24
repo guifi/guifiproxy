@@ -1,0 +1,38 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Format: 1.8
+Date: Sun, 20 Mar 2011 23:53:29 +0100
+Source: guifi-proxy3
+Binary: guifi-proxy3
+Architecture: all
+Version: 0.0.1-1
+Distribution: unstable
+Urgency: low
+Maintainer: Pere Casas Puig <pcasas.pere@gmail.com>
+Changed-By: Pere Casas Puig <pcasas.pere@gmail.com>
+Description: 
+ guifi-proxy3 - Guifi.net Proxy federation system
+Changes: 
+ guifi-proxy3 (0.0.1-1) unstable; urgency=low
+ .
+   * Initial release
+   *
+Checksums-Sha1: 
+ 7adf5aa31c4170b19b598b41990cf1b357efb290 64816 guifi-proxy3_0.0.1-1_all.deb
+Checksums-Sha256: 
+ 3cfdbdd1995c8b708aea802ee5fa959f487db40fc1abc3516888cd7144ffdb91 64816 guifi-proxy3_0.0.1-1_all.deb
+Files: 
+ 6ba91789696b9e717656a6a7022dfcb5 64816 web optional guifi-proxy3_0.0.1-1_all.deb
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iQEcBAEBAgAGBQJNi2FdAAoJEAnhk/PDoen7WoMH/jyscrkW/G3T7CrYimXCv5iJ
+ryXBM2rDVVeYs+/qY1Eli7L7AyQuan1KT+vkOTBobq/2oQchreze7bXPNvjkpmt/
+A7lwhG0LLXKykJ0MlAGZA7sasgg/0WDxeVAk0H5bXvSCoTd0uDubln51N4qbyYwe
+cfK8Qbir7mpB0a3ovQlwkBc/3FCeUkLQAJJk//yX1hM4Fh+AH2z1pvJ4Zptt/07m
+Ic8v3ofIfGdEhydQ23Jf2sAfYRRtdCmloVpQZX1EbwwRlvTv4Uq8C00pQNDwHMp7
+0GtR5kzeBTbd4PPgxoToDQfYaNUHwxvXfe1YZX+8ub4RD9y5MjuBCWyH8LwBV/w=
+=DSIo
+-----END PGP SIGNATURE-----
