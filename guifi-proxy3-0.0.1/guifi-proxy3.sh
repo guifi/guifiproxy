@@ -5,7 +5,7 @@ passwd_dir='/etc/guifi-proxy3/'
 passwd=${passwd_dir}passwd
 tmp=/tmp/passwd
 # Debian/Ubuntu Reload
-reload='/etc/init.d/squid3 reload'
+#reload='/etc/init.d/squid3 reload'
 # Fedora/RedHat Reload
 #reload='service squid reload'
 

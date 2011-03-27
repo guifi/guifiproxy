@@ -20,7 +20,6 @@ case "$1" in
 	;;
 
     abort-upgrade)
-	/etc/init.d/squid3 start
     ;;
 
     *)
