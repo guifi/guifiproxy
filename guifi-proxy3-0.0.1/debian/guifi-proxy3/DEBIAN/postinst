@@ -53,7 +53,7 @@ EOT
         fi
 	echo "Loading special version Guifi.net ";
         /bin/mv /tmp/squid.conf /etc/squid3/squid.conf
-	/etc/init.d/squid3 reload
+	/etc/init.d/squid3 start
 	exit 0
 	;;
 
