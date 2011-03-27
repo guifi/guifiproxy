@@ -53,9 +53,7 @@ EOT
         fi
 	echo "Loading special version Guifi.net ";
         /bin/mv /tmp/squid.conf /etc/squid3/squid.conf
-	echo "Starting the Squid proxy server ...... .......";
 	/etc/init.d/squid3 start
-	echo "Enjoy it !";
 	exit 0
 	;;
 
