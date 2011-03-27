@@ -1,7 +1,7 @@
 #!/bin/sh
 #--- CONFIG ---
 node=4282;
-passwd_dir='/tmp/'
+passwd_dir='/etc/guifi-proxy3/'
 passwd=${passwd_dir}passwd
 tmp=/tmp/passwd
 # Debian/Ubuntu Reload
