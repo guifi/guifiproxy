@@ -16,11 +16,12 @@ set -e
 
 case "$1" in
     install|upgrade)
-	/etc/init.d/squid3 stop
+	exit 0
 	;;
 
     abort-upgrade)
-    ;;
+	exit 0
+	;;
 
     *)
         echo "preinst called with unknown argument \`$1'" >&2

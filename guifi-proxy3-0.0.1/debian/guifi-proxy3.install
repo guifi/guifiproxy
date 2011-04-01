@@ -1,2 +1,2 @@
 guifi-proxy3.sh /usr/share/guifi-proxy3/
-squid.conf /tmp/
+guifi.conf /etc/squid3/

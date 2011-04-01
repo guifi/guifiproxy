@@ -11,3 +11,11 @@ Template: guifi-proxy3/forcefetch
 Type: boolean
 Default: true
 Description: Force to fetch passwd file now.
+
+Template: guifi-proxy3/proxy_name
+Type: string
+Description: Guifi Proxy name (ex. foo-server).
+
+Template: guifi-proxy3/allow_host
+Type: string
+Description: Host you want to access with squid (ex. 10.138.57.2 or 192.168.0.0/16)
