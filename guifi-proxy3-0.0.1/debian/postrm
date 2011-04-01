@@ -25,8 +25,9 @@ case "$1" in
 		if [ -e /etc/squid3/squid.conf.backup.initial ]; then
 
 			echo "Restoring the initial configuration squid.conf.backup.initial ...... .......";
-			/bin/mv -f /etc/squid3/squid.conf.backup.initial /etc/squid3/squid.conf
-			/bin/rm -f /etc/squid3/guifi.conf
+			FILE="/etc/squid3/squid.conf"
+  			grep -Ev 'guifi' "$FILE" > "$FILE.tmp"
+  			mv "$FILE.tmp" $FILE
 		fi
 		echo "Starting the server squid ...... .......";
 		/etc/init.d/squid3 reload 

@@ -14,8 +14,9 @@ Description: Force to fetch passwd file now.
 
 Template: guifi-proxy3/proxy_name
 Type: string
+Default: Guifi-server
 Description: Guifi Proxy name (ex. foo-server).
 
 Template: guifi-proxy3/allow_host
 Type: string
-Description: Host you want to access with squid (ex. 10.138.57.2 or 192.168.0.0/16)
+Description: By default squid will not let you view any web page located within the lan. if you want it you can change this by entering the IP or the network that wants to be viewed using squid. (ex. 10.138.57.2 or 10.138.57.0/24 or 192.168.0.0/16) default is null
