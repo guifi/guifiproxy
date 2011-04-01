@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/bash
 #
 # $Id$ 
 #
@@ -24,8 +24,6 @@ case $1 in
 
 	/bin/cat << EOT > $tmpfile
 
-#!/bin/sh
-#
 # Script at /usr/share/guifi-proxy3
 #
 # Server base url ex: http://www.guifi.net
@@ -67,11 +65,10 @@ EOT
 	
 	echo "Loading special version Guifi.net ";
         /bin/echo "include /etc/squid3/guifi.conf" >> /etc/squid3/squid.conf
-	/etc/init.d/squid3 stop
-	/etc/init.d/squid3 start
+	invoke-rc.d squid3 reload
 	echo "Enjoy it";
 	exit 0;
-	echo "Enjoy2_test";;
+	;;
 
 	*)
 	echo "postinst called with unknown argument \`$1'" 1>&2

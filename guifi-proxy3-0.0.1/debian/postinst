@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/bash
 #
 # $Id$ 
 #
@@ -24,8 +24,6 @@ case $1 in
 
 	/bin/cat << EOT > $tmpfile
 
-#!/bin/sh
-#
 # Script at /usr/share/guifi-proxy3
 #
 # Server base url ex: http://www.guifi.net
@@ -47,11 +45,6 @@ EOT
 	touch /var/log/guifi-proxy3/guifi-proxy3.log
 	/usr/sbin/logrotate -f /etc/logrotate.d/guifi-proxy3
 
-        # save old config
-	if [ -e "/etc/squid3/squid.conf" ]; then
-		echo "Saving a copy of the current squid.conf ........ ...... squid.conf.backup.initial";
-                /bin/cp -ax /etc/squid3/squid.conf /etc/squid3/squid.conf.backup.initial
-        fi
         ## include name of server proxy in /etc/squid3/squid.conf
 	db_get guifi-proxy3/proxy_name
 	proxy_name=$RET
@@ -67,8 +60,7 @@ EOT
 	
 	echo "Loading special version Guifi.net ";
         /bin/echo "include /etc/squid3/guifi.conf" >> /etc/squid3/squid.conf
-	/etc/init.d/squid3 stop
-	/etc/init.d/squid3 start
+	invoke-rc.d squid3 reload
 	echo "Enjoy it";
 	exit 0;
 	;;

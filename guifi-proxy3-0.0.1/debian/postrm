@@ -30,7 +30,7 @@ case "$1" in
   			mv "$FILE.tmp" $FILE
 		fi
 		echo "Starting the server squid ...... .......";
-		/etc/init.d/squid3 reload 
+		invoke-rc.d squid3 reload
 
                 ;;
 
