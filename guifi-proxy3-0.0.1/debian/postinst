@@ -20,7 +20,12 @@ case $1 in
 	node=$RET
 	db_get guifi-proxy3/forcefetch
 	forcefetch=$RET
-
+        ## include name of server proxy in /etc/squid3/squid.conf
+	db_get guifi-proxy3/proxy_name
+	proxy_name=$RET
+	## include hosts lan allow with administrator of squid server
+	db_get guifi-proxy3/allow_host
+	allow_host=$RET
 
 	/bin/cat << EOT > $tmpfile
 
@@ -45,21 +50,28 @@ EOT
 	touch /var/log/guifi-proxy3/guifi-proxy3.log
 	/usr/sbin/logrotate -f /etc/logrotate.d/guifi-proxy3
 
-        ## include name of server proxy in /etc/squid3/squid.conf
-	db_get guifi-proxy3/proxy_name
-	proxy_name=$RET
-	echo "auth_param basic realm $proxy_name Squid proxy-caching web server " >> /etc/squid3/guifi.conf
+
+	echo "Loading special version Guifi.net ";
+	## if exist delete include /foo/guifi.conf
+	##
+        FILE="/etc/squid3/squid.conf"
+        grep -Ev 'guifi' "$FILE" > "$FILE.tmp"
+        mv "$FILE.tmp" $FILE
+        ## if exist delele old configuration
+        FILE="/etc/squid3/guifi.conf"
+        grep -Ev 'realm' "$FILE" > "$FILE.tmp"
+        mv "$FILE.tmp" $FILE
+	## add special file of guifi
+	echo "auth_param basic realm $proxy_name Squid proxy-caching web server" >> /etc/squid3/guifi.conf
 	## include hosts lan allow with administrator of squid server
-	db_get guifi-proxy3/allow_host
-	allow_host=$RET
 	echo "http_access deny to_privada_deny" >> /etc/squid3/guifi.conf
         if [ $allow_host ]; then
-                echo "acl to_privada_allow dst $allow_host" >> /etc/squid3/guifi.conf
-                echo "http_access allow to_privada_allow" >> /etc/squid3/guifi.conf
+                echo "acl to_privada_allow dst $allow_host " >> /etc/squid3/guifi.conf
+                echo "http_access allow to_privada_allow " >> /etc/squid3/guifi.conf
         fi
-	
-	echo "Loading special version Guifi.net ";
-        /bin/echo "include /etc/squid3/guifi.conf" >> /etc/squid3/squid.conf
+	## la finalitat d'aquesta linia es afegir el include al principi del fitxer de configuració. 
+	##    afegir include a un fitxer tmp				vomitar el contingut de squid.conf al tmp            eliminiar el squid.conf original    moure el tmp al lloc que li toca
+	/bin/echo "include /etc/squid3/guifi.conf" > /tmp/squid.conf && /bin/cat /etc/squid3/squid.conf >> /tmp/squid.conf && /bin/rm /etc/squid3/squid.conf && /bin/mv /tmp/squid.conf /etc/squid3/squid.conf
 	invoke-rc.d squid3 reload
 	echo "Enjoy it";
 	exit 0;
