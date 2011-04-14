@@ -1,2 +1,0 @@
-postins => ask if there are computers in local network
-sarg => configuring squid-reports
