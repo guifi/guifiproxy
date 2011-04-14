@@ -19,20 +19,20 @@ Changes:
    * Initial release
    *
 Checksums-Sha1: 
- 9c250e62a0017eef1ba342d7a25f649bb1096446 4994 guifi-proxy3_0.0.1-1_all.deb
+ 027f359ac1d1f62852d47cedde3196e6d962817c 4994 guifi-proxy3_0.0.1-1_all.deb
 Checksums-Sha256: 
- 4ebff0500412d1a9b3674f8b49fb7ea9f2691fb34359d997c770818aef69c8f4 4994 guifi-proxy3_0.0.1-1_all.deb
+ 2e9882b68936fb526750364712097f2563bf69faa12132894aaf1d724e2b4ee6 4994 guifi-proxy3_0.0.1-1_all.deb
 Files: 
- 3d0e3f93923709260249816a78d70241 4994 web optional guifi-proxy3_0.0.1-1_all.deb
+ f87d39d82782697da946bf4bd1f884a7 4994 web optional guifi-proxy3_0.0.1-1_all.deb
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.10 (GNU/Linux)
 
-iQEbBAEBAgAGBQJNpzkcAAoJEAnhk/PDoen7fxwH+IW0pzZ71PKIPsO1lblJLEM9
-bMc/NG3tFr/9ZRpTxeVluyzUrMiXTTZ3ze7/1bsOguBWhcRiTX2kAJq7D0N6GIHT
-5aOMo5AyHXoHbLVLLPesMZPzFYzrLjxUfwsjDWMAUuOeYPFE3AuN4D84MWQw8edw
-FWID5JaEqNVwD+CaVYIF7BmLb1IfBDBswjlSMVEMF7KR1jeTqpQYyyoCGHtuRtMa
-VyWBpvpHLnX6oNI+OHQkYAvCgsWCmTm7knDa8hcbdqC/18JrIxLQuWur3OjxlspC
-VQjwTkVUFF1sQ85nDT+fe/4bzli77PCtZhb19UZFyRzScBtLDEkXH3JMqNk6Mw==
-=iWW5
+iQEcBAEBAgAGBQJNpztYAAoJEAnhk/PDoen7ANoH/3TmiS2XJmeuEu1FWc3yy6g8
+rxWvOZHs39Vy/2zvk/cRbFP6ZUNQoscew8ZPx5mkh0lgyaZTabhaBClGSyaop/jb
+RDVn9qWUXYOV7+EuRj+dxLp872PGPBWCJAWU1OT1Pk3Dg/ni4I3kGh+e862jf7op
+JgZleuVLUjWHl9Ge1HMHRtu+m+HhcaJGyO8+pqwV+Ao5osv6nuPwqacEldlcDH0q
+Y4WvhV6MPNGcjSPtLuMNkNWrPuK3gKMWM65Mty9Mlj2IF2QlJPXGmm8w1AJKG+j0
+2oaRrQvr+lrQCymRnuFDdiTfARfSYLckjAKWC9BReIie7KGXFLgnVXphooZR5/E=
+=Dsvu
 -----END PGP SIGNATURE-----

@@ -58,9 +58,7 @@ EOT
         grep -Ev 'guifi' "$FILE" > "$FILE.tmp"
         mv "$FILE.tmp" $FILE
         ## if exist delele old configuration
-        FILE="/etc/squid3/guifi.conf"
-        grep -Ev 'realm' "$FILE" > "$FILE.tmp"
-        mv "$FILE.tmp" $FILE
+        # pendent
 	## add special file of guifi
 	echo "auth_param basic realm $proxy_name Squid proxy-caching web server" >> /etc/squid3/guifi.conf
 	## include hosts lan allow with administrator of squid server
