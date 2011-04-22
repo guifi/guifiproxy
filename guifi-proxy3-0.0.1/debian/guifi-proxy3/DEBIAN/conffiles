@@ -1,4 +1,3 @@
 /etc/logrotate.d/guifi-proxy3
 /etc/cron.d/guifi-proxy3
 /etc/squid3/guifi.conf
-/etc/cron.daily/squid_cache

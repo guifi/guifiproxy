@@ -2,7 +2,7 @@ Package: guifi-proxy3
 Version: 0.0.1-1
 Architecture: all
 Maintainer: Pere Casas Puig <pcasas.pere@gmail.com>
-Installed-Size: 120
+Installed-Size: 116
 Pre-Depends: squid3, sarg, wget, coreutils
 Section: web
 Priority: optional
