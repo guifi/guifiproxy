@@ -4,8 +4,8 @@ Architecture: all
 Maintainer: Pere Casas Puig <pcasas.pere@gmail.com>
 Installed-Size: 116
 Pre-Depends: squid3, wget, coreutils
-Conflicts: squid
-Replaces: squid
+Conflicts: guifi-proxy, squid
+Replaces: guifi-proxy, squid
 Section: web
 Priority: optional
 Description: Guifi.net Proxy federation system
