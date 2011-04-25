@@ -10,7 +10,11 @@ if [ "$1" = configure -o "$1" = reconfigure ] ; then
 	db_input high guifi-proxy3/node || true
 	db_input high guifi-proxy3/forcefetch || true
 	db_input high guifi-proxy3/proxy_name || true
-        db_input high guifi-proxy3/allow_host || true 
+        db_input high guifi-proxy3/email || true 
+        db_input high guifi-proxy3/language || true 
+        db_input high guifi-proxy3/hd || true 
+        db_input high guifi-proxy3/ram || true 
+
 	db_go
 
 fi

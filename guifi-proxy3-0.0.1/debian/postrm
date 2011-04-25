@@ -26,7 +26,8 @@ case "$1" in
 			echo "Restoring the initial configuration squid.conf.backup.initial ...... .......";
 			FILE="/etc/squid3/squid.conf"
   			grep -Ev 'guifi' "$FILE" > "$FILE.tmp"
-  			mv "$FILE.tmp" $FILE
+                        grep -Ev 'custom' "$FILE" > "$FILE.tmp"
+			mv "$FILE.tmp" $FILE
 		fi
 		echo "Starting the server squid ...... .......";
 		invoke-rc.d squid3 reload

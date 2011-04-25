@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# $Id$ 
+# $Id$
 #
 
 set -e
@@ -23,21 +23,24 @@ case $1 in
         ## include name of server proxy in /etc/squid3/squid.conf
 	db_get guifi-proxy3/proxy_name
 	proxy_name=$RET
-	## include hosts lan allow with administrator of squid server
-	db_get guifi-proxy3/allow_host
-	allow_host=$RET
+	# admin email
+	db_get guifi-proxy3/email
+        email=$RET
+        db_get guifi-proxy3/language
+        language=$RET
+        db_get guifi-proxy3/hd
+        hd=$RET
+        db_get guifi-proxy3/ram
+        ram=$RET
 
-	/bin/cat << EOT > $tmpfile
 
+/bin/cat << EOT > $tmpfile
 # Script at /usr/share/guifi-proxy3
-#
 # Server base url ex: http://www.guifi.net
 base_url='$base_url';
 # Node ID
 node=$node;
-
 EOT
-
 	/usr/bin/ucf --three-way --debconf-ok $tmpfile $configfile
 	/bin/rm $tmpfile
 
@@ -52,25 +55,29 @@ EOT
 
 
 	echo "Loading special version Guifi.net ";
-	## if exist delete include /foo/guifi.conf
-	##
-        FILE="/etc/squid3/squid.conf"
+	## if exist guifi.conf delete
+	if [ -e /etc/squid3/guifi.conf ]
+	then
+		/bin/rm /etc/squid3/guifi.conf
+	fi
+	# copy default configuration of guifi.conf
+	/bin/cp /usr/share/guifi-proxy3/guifi.example.conf /etc/squid3/guifi.conf
+	## add special file of guifi
+        echo "cache_mem $ram MB" >> /etc/squid3/guifi.conf
+        echo "cache_dir ufs /var/spool/squid3 $hd 32 512" >> /etc/squid3/guifi.conf
+	echo "auth_param basic realm $proxy_name Squid proxy-caching web server" >> /etc/squid3/guifi.conf
+	echo "cache_mgr $email" >> /etc/squid3/guifi.conf
+	echo "error_directory /usr/share/squid3/errors/$language" >> /etc/squid3/guifi.conf
+	## delete include custom.conf
+	FILE="/etc/squid3/squid.conf"
+        grep -Ev 'custom.conf' "$FILE" > "$FILE.tmp"
         grep -Ev 'guifi' "$FILE" > "$FILE.tmp"
         mv "$FILE.tmp" $FILE
-        ## if exist delele old configuration
-        # pendent
-	## add special file of guifi
-	echo "auth_param basic realm $proxy_name Squid proxy-caching web server" >> /etc/squid3/guifi.conf
-	## include hosts lan allow with administrator of squid server
-	echo "http_access deny to_privada_deny" >> /etc/squid3/guifi.conf
-        if [ $allow_host ]; then
-                echo "acl to_privada_allow dst $allow_host " >> /etc/squid3/guifi.conf
-                echo "http_access allow to_privada_allow " >> /etc/squid3/guifi.conf
-        fi
-	## la finalitat d'aquesta linia es afegir el include al principi del fitxer de configuració. 
-	##    afegir include a un fitxer tmp				vomitar el contingut de squid.conf al tmp            eliminiar el squid.conf original    moure el tmp al lloc que li toca
-	/bin/echo "include /etc/squid3/guifi.conf" > /tmp/squid.conf && /bin/cat /etc/squid3/squid.conf >> /tmp/squid.conf && /bin/rm /etc/squid3/squid.conf && /bin/mv /tmp/squid.conf /etc/squid3/squid.conf
-	invoke-rc.d squid3 reload
+        ## include config file custom.conf and guifi.conf in squid.conf
+        /bin/echo "include /etc/squid3/custom.conf" > /tmp/squid.conf && /bin/echo "include /etc/squid3/guifi.conf" >> /tmp/squid.conf && /bin/cat /etc/squid3/squid.conf >> /tmp/squid.conf && /bin/rm /etc/squid3/squid.conf && /bin/mv /tmp/squid.conf /etc/squid3/squid.conf
+	# reload squid3 
+	/usr/sbin/invoke-rc.d squid3 reload
+	# magic ;)
 	echo "Enjoy it";
 	exit 0;
 	;;
