@@ -65,7 +65,7 @@ EOT
 	## add special file of guifi
         echo "cache_mem $ram MB" >> /etc/squid3/guifi.conf
         echo "cache_dir ufs /var/spool/squid3 $hd 32 512" >> /etc/squid3/guifi.conf
-	echo "auth_param basic realm $proxy_name Squid proxy-caching web server" >> /etc/squid3/guifi.conf
+	echo "auth_param basic realm $proxy_name" >> /etc/squid3/guifi.conf
 	echo "cache_mgr $email" >> /etc/squid3/guifi.conf
 	echo "error_directory /usr/share/squid3/errors/$language" >> /etc/squid3/guifi.conf
 	## delete include custom.conf
