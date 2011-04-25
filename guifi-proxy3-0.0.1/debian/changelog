@@ -1,3 +1,10 @@
+guifi-proxy3 (0.0.1-1.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * some fix
+
+ -- Pere Casas Puig <casas@Phoenix>  Mon, 25 Apr 2011 23:30:06 +0200
+
 guifi-proxy3 (0.0.1-1) unstable; urgency=low
 
   * Initial release 
