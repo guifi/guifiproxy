@@ -1,0 +1,53 @@
+guifi-proxy3 (1.1.23) guifi; urgency=low
+  * move guinux tools to tools/guinux/folder
+  * Fix more "invoke-rc.d" commands to "/usr/sbin/service"
+ -- Miquel Martos <miquel.martos@guifi.net>  Mon, 18 Mar 2013 16:43:47 +0200
+
+guifi-proxy3 (1.1.22) guifi; urgency=low
+  * Fix path
+ -- Miquel Martos <miquel.martos@guifi.net>  Thu, 28 Feb 2013 22:45:47 +0200
+
+guifi-proxy3 (1.1.21) guifi; urgency=low
+  * Fix reload script! Thanks Alejandro Martin!
+ -- Miquel Martos <miquel.martos@guifi.net>  Thu, 28 Feb 2013 17:25:47 +0200
+
+guifi-proxy3 (1.1.20) guifi; urgency=low
+  * move to stable branch, set as default." LDAP"
+ -- Miquel Martos <miquel.martos@guifi.net>  Thu, 28 Feb 2013 16:25:47 +0200
+
+guifi-proxy3 (1.1.12) guifi-testing; urgency=low
+  * Siganture tests
+ -- Miquel Martos <miquel.martos@guifi.net>  Wed, 19 Oct 2011 15:40:47 +0200
+
+guifi-proxy3 (1.1.11) guifi-testing; urgency=low
+
+  * Solved some fix
+
+ -- Pere Casas Puig <pcasas.pere@gmail.com>  Mon, 17 Oct 2011 22:23:47 +0200
+
+guifi-proxy3 (1.1) guifi; urgency=low
+
+  * Solved the problems during the post installation
+
+ -- Pere Casas Puig <pcasas.pere@gmail.com>  Wed, 05 Oct 2011 21:14:28 +0200
+
+guifi-proxy3 (1.0) guifi; urgency=low
+
+  * authentication ldap
+  * Solved the problems during the post installation 
+
+ -- Pere Casas Puig <pcasas.pere@gmail.com>  Wed, 05 Oct 2011 20:54:30 +0200
+
+guifi-proxy3 (0.0.1-1.1) guifi; urgency=low
+
+  * Non-maintainer upload.
+  * some fix
+
+ -- Pere Casas Puig <casas@Phoenix>  Mon, 25 Apr 2011 23:30:06 +0200
+
+guifi-proxy3 (0.0.1-1) guifi; urgency=low
+
+  * Initial release 
+  * 
+
+ -- Pere Casas Puig <pcasas.pere@gmail.com>  Sun, 20 Mar 2011 23:53:29 +0100

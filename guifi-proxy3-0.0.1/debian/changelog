@@ -1,3 +1,8 @@
+guifi-proxy3 (0.0.1-2) guifi; urgency=low
+
+  * Bump to new branch
+  * Add guinux tools
+ -- Miquel Martos <miquel.martos@guifi.net>  Sun, 16 Oct 2011 11:19:06 +0200
 guifi-proxy3 (0.0.1-1.1) unstable; urgency=low
 
   * Non-maintainer upload.

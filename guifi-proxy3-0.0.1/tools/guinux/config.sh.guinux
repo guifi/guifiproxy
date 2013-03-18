@@ -1,0 +1,14 @@
+# Script at /usr/share/guifi-proxy3
+# Server base url ex: http://www.guifi.net
+base_url=%PROXUrl%;
+# Node ID
+node=%PROXId%;
+#LDAP Servers
+ldap_main=%LDAP_MAIN%
+ldap_backup=%LDAP_BACKUP%
+# misc squid settings
+realm=%REALM%
+manager=%MANAGER%         
+language=%LANGUAGE%
+cache_size=%CACHE_SIZE%
+cache_mem=%CACHE_MEM%

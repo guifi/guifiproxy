@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+/bin/echo ""
+/bin/echo "`date +%y-%m-%d___%k:%M`-----------------------------------------------------------------------------------" 
+/usr/sbin/service squid3 stop
+/bin/rm -Rf /var/spool/squid3/*
+/usr/sbin/squid3 squid3 -z
+/usr/sbin/service squid3 start
+#fi
+

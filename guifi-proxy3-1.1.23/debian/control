@@ -1,0 +1,17 @@
+Source: guifi-proxy3
+Section: web
+Priority: optional
+Maintainer: Pere Casas Puig <pcasas.pere@gmail.com>
+Build-Depends: cdbs, debhelper (>= 7.0.50~)
+Standards-Version: 3.8.4
+Vcs-Git: git://gitorious.org/guifi/guifi-proxy-debian.git
+Vcs-Browser: http://git.gitorious.org/guifi/guifi-proxy-debian.git
+
+Package: guifi-proxy3
+Architecture: all
+Pre-Depends: squid3, wget, coreutils, ldap-utils perl
+Conflicts: squid, guifi-proxy
+Replaces: squid, guifi-proxy
+Suggests: sarg
+Description: Guifi.net Proxy federation system
+ This package is based on guifi-proxy_0.0.2 package created by the Developer & maintainer Carles Guadall Blancafort <carles@viladelpingui.net>.

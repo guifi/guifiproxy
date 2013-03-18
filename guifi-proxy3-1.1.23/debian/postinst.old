@@ -1,0 +1,109 @@
+#!/bin/bash
+#
+# $Id$
+#
+
+set -e
+
+configfile='/etc/guifi-proxy3/config.sh';
+tmpfile=`/bin/tempfile -m 644`;
+
+case $1 in
+	configure|reconfigure)
+
+	. /usr/share/debconf/confmodule
+	db_version 2.0 || [ $? -lt 30 ]
+	#
+	db_get guifi-proxy3/baseurl
+	base_url=$RET
+	db_get guifi-proxy3/node
+	node=$RET
+	db_get guifi-proxy3/forcefetch
+	forcefetch=$RET
+	#first ldap server
+	db_get guifi-proxy3/ldap_main
+	ldap_main=$RET
+	# second and backup ldap server
+	db_get guifi-proxy3/ldap_backup
+	ldap_backup=$RET
+        ## include name of server proxy in /etc/squid3/squid.conf
+	db_get guifi-proxy3/proxy_name
+	proxy_name=$RET
+	# admin email
+	db_get guifi-proxy3/email
+        email=$RET
+	# language of errors
+        db_get guifi-proxy3/language
+        language=$RET
+	# hd size of cache
+        db_get guifi-proxy3/hd
+        hd=$RET
+	# ram size of cache
+        db_get guifi-proxy3/ram
+        ram=$RET
+
+
+/bin/cat << EOT > $tmpfile
+# Script at /usr/share/guifi-proxy3
+# Server base url ex: http://www.guifi.net
+base_url='$base_url';
+# Node ID
+node=$node;
+EOT
+	/usr/bin/ucf --three-way --debconf-ok $tmpfile $configfile
+	/bin/rm $tmpfile
+
+	if [ $forcefetch ]
+	then
+		echo "Fetching passwd file.";
+		if [ -x /usr/share/guifi-proxy3/guifi-proxy3.sh ]; then echo "..."; /usr/share/guifi-proxy3/guifi-proxy3.sh; fi
+	fi
+	# Force logrotate
+	touch /var/log/guifi-proxy3/guifi-proxy3.log
+	/usr/sbin/logrotate -f /etc/logrotate.d/guifi-proxy3
+
+
+	echo "Loading special version Guifi.net ";
+	## if exist guifi.conf delete
+	if [ -e /etc/squid3/guifi.conf ]
+	then
+		/bin/rm /etc/squid3/guifi.conf
+	fi
+	# copy default configuration of guifi.conf
+	/bin/cp /usr/share/guifi-proxy3/guifi.example.conf /etc/squid3/guifi.conf
+	## add var in /etc/guifi-proxy3/config.sh
+	/bin/echo "base_url='$base_url'" >> /etc/guifi-proxy3/config.sh
+	/bin/echo "node='$node '" >> /etc/guifi-proxy3/config.sh
+	/bin/echo "ldap_main='$ldap_main '" >> /etc/guifi-proxy3/config.sh
+	/bin/echo "ldap_backup='$ldap_backup '" >> /etc/guifi-proxy3/config.sh
+	/bin/echo "realm='$proxy_name'" >> /etc/guifi-proxy3/config.sh
+	/bin/echo "manager='$mail '" >> /etc/guifi-proxy3/config.sh
+	/bin/echo "language='$language'" >> /etc/guifi-proxy3/config.sh
+	/bin/echo "cache_size='$hd'" >> /etc/guifi-proxy3/config.sh
+	/bin/echo "cache_mem='$ram'" >> /etc/guifi-proxy3/config.sh
+	## delete include custom.conf
+	FILE="/etc/squid3/squid.conf"
+        grep -Ev 'custom.conf' "$FILE" > "$FILE.tmp"
+        grep -Ev 'guifi' "$FILE" > "$FILE.tmp"
+        mv "$FILE.tmp" $FILE
+        ## include config file custom.conf and guifi.conf in squid.conf
+        /bin/echo "include /etc/squid3/custom.conf" > /tmp/squid.conf && /bin/echo "include /etc/squid3/guifi.conf" >> /tmp/squid.conf && /bin/cat /etc/squid3/squid.conf >> /tmp/squid.conf && /bin/rm /etc/squid3/squid.conf && /bin/mv /tmp/squid.conf /etc/squid3/squid.conf
+	# reload squid3 
+	/usr/sbin/invoke-rc.d squid3 stop
+	/bin/rm -rf /var/spool/squid3/*
+	/usr/sbin/squid3 -z
+	/usr/sbin/invoke-rc.d squid3 start
+	# magic ;)
+	echo "Enjoy it";
+	exit 0;
+	;;
+
+	*)
+	echo "postinst called with unknown argument \`$1'" 1>&2
+	exit 1
+	;;
+esac
+
+#DEBHELPER#
+
+exit 0

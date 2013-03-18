@@ -1,0 +1,7 @@
+/var/log/guifi-proxy3/*.log {
+	daily
+	compress
+	delaycompress
+	rotate 20
+	missingok
+}
