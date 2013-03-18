@@ -1,3 +1,7 @@
+guifi-proxy3 (1.1.24) guifi; urgency=low
+  * some fixes
+ -- Miquel Martos <miquel.martos@guifi.net>  Mon, 18 Mar 2013 17:30:04 +0200
+
 guifi-proxy3 (1.1.23) guifi; urgency=low
   * move guinux tools to tools/guinux/folder
   * Fix more "invoke-rc.d" commands to "/usr/sbin/service"

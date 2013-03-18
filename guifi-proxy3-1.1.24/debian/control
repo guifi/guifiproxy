@@ -9,7 +9,7 @@ Vcs-Browser: http://git.gitorious.org/guifi/guifi-proxy-debian.git
 
 Package: guifi-proxy3
 Architecture: all
-Pre-Depends: squid3, wget, coreutils, ldap-utils perl
+Pre-Depends: squid3, wget, coreutils, ldap-utils, perl
 Conflicts: squid, guifi-proxy
 Replaces: squid, guifi-proxy
 Suggests: sarg

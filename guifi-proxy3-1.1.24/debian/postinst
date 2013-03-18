@@ -60,7 +60,7 @@ case $1 in
 	/bin/echo "cache_mem='$ram'" >> /etc/guifi-proxy3/config.sh
 	## delete include custom.conf
 	FILE="/etc/squid3/squid.conf"
-        /bin/grep -Ev 'custom.conf' "$FILE" > "$FILE.tmp"
+       /bin/grep -Ev 'custom.conf' "$FILE" > "$FILE.tmp"
         /bin/grep -Ev 'guifi' "$FILE" > "$FILE.tmp"
         /bin/mv "$FILE.tmp" $FILE
         ## include config file custom.conf and guifi.conf in squid.conf
@@ -74,18 +74,20 @@ case $1 in
 	# first files.
 	/bin/echo "" > /etc/squid3/custom.conf
 	/bin/echo "" > /etc/squid3/guifi.conf
-	# stop squid3 
-	/usr/sbin/service squid3 stop
+	# stop squid3
+        invoke-rc.d squid3 stop
+	# /usr/sbin/service squid3 stop
 	# remove old cache memory
 	/bin/rm -rf /var/spool/squid3/*
+        # create installation control file
+        /bin/touch /tmp/guifi-proxy3.crontrol
 	# generate new guifi.conf in /etc/squid3/guifi.conf
 	/usr/share/guifi-proxy3/guifi-proxy3.sh
         # new cache squid
         /usr/sbin/squid3 -z
-	# the end 
-	/bin/echo "Please run:";
-	/bin/echo "/usr/sbin/service squid3 start";
-	/bin/echo "Enjoy it";
+        # remove instalation control file
+        /bin/rm /tmp/guifi-proxy3.crontrol
+	# the end
 	exit 0;
 	;;
 

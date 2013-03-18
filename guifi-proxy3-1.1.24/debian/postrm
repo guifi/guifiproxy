@@ -20,7 +20,7 @@ case "$1" in
                         /usr/bin/ucf --purge /etc/guifi-proxy3/config.sh
                         /bin/rm -rf /etc/guifi-proxy3/
                 fi
-		
+
 		if [ -e /etc/squid3/squid.conf.backup.initial ]; then
 
 			echo "Restoring the initial configuration squid.conf.backup.initial ...... .......";
@@ -29,8 +29,8 @@ case "$1" in
                         grep -Ev 'custom' "$FILE" > "$FILE.tmp"
 			mv "$FILE.tmp" $FILE
 		fi
-		echo "Starting the server squid ...... .......";
-		/usr/sbin/service squid3 reload
+		echo "Stoping the server squid ...... .......";
+		        invoke-rc.d squid3 stop
 
                 ;;
 

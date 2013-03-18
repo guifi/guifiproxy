@@ -188,4 +188,10 @@ OFS=$IFS
 
 echo -e "$DEFCONF" >> /etc/squid3/guifi.conf
 
-eval $reload
+if [ -f /tmp/guifi-proxy3.crontrol ]
+then
+	eval $restart
+else
+        eval $reload
+fi
+
