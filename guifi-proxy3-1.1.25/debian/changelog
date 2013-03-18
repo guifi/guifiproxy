@@ -1,3 +1,8 @@
+guifi-proxy3 (1.1.25) guifi; urgency=low
+  * New squid_cache script
+  * cron changes.
+ -- Miquel Martos <miquel.martos@guifi.net>  Mon, 18 Mar 2013 22:53:04 +0200
+
 guifi-proxy3 (1.1.24) guifi; urgency=low
   * some fixes
  -- Miquel Martos <miquel.martos@guifi.net>  Mon, 18 Mar 2013 17:30:04 +0200
