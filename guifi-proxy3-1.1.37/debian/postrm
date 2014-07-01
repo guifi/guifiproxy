@@ -29,8 +29,8 @@ case "$1" in
                         grep -Ev 'custom' "$FILE" > "$FILE.tmp"
 			mv "$FILE.tmp" $FILE
 		fi
-		echo "Stoping the server squid ...... .......";
-		        invoke-rc.d squid3 stop
+		echo "Starting the server squid ...... .......";
+		invoke-rc.d squid3 reload
 
                 ;;
 

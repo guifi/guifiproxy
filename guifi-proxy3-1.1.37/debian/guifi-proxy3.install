@@ -1,3 +1,4 @@
+check_squid.sh /usr/share/guifi-proxy3/
 guifi-proxy3.sh /usr/share/guifi-proxy3/
 tools/guinux/proxconfig.pl /usr/share/guifi-proxy3/
 squid_cache /usr/share/guifi-proxy3/

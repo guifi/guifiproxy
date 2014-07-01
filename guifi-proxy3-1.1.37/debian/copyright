@@ -1,14 +1,11 @@
 This work was packaged for Debian by:
 
-    Pere Casas Puig <pcasas.pere@gmail.com> on Sun, 20 Mar 2011 23:45:09 +0100
+    Miquel Martos <miquel.martos@guifi.net> on Mon, 21 Mar 2011 23:45:09 +0100
 
 It was downloaded from:
 
     http://git.gitorious.org/guifi/guifi-proxy-debian.git
 
-Copyright:
-
-    Copyright (C) 2011 Pere Casas Puig
 
 License:
 
@@ -28,6 +25,3 @@ License:
 On Debian systems, the complete text of the GNU General
 Public License version 3 can be found in "/usr/share/common-licenses/GPL-3".
 
-The Debian packaging is:
-
-    Copyright (C) 2011 Pere Casas Puig <pcasas.pere@gmail.com>

@@ -6,10 +6,6 @@ base_url='http://www.guifi.net'
 tmp='/tmp/federation_list'
 ldap_main="ldap.guifi.net"
 ldap_backup="ldap2.guifi.net"
-# Enable for Debian/Ubuntu
-restart="/usr/sbin/service squid3 restart"
-reload="/usr/sbin/service squid3 reload"
-# Enable for Fedora/RedHat
 #--- END DEFAULT CONFIG ---
 
 #--- LOAD CONFIG FILE ---
@@ -20,6 +16,20 @@ if [ -f $config ]
   . $config
 fi
 #--- END LOAD CONFIG FILE ---
+
+
+if [ -f /usr/lib/squid3/squid_ldap_auth ];
+then
+        LDAP_AUTH='squid_ldap_auth'
+else
+        LDAP_AUTH='basic_ldap_auth'
+fi
+if [ -f /usr/lib/squid3/squid_ldap_group ];
+then
+        LDAP_GROUP='squid_ldap_group'
+else
+        LDAP_GROUP='ext_ldap_group_acl'
+fi
 
 HEADER="# /etc/squid3/guifi.conf
 # This file contains the configurations generated during installation
@@ -112,7 +122,7 @@ do
     echo "$HEADER" > /etc/squid3/guifi.conf
     echo "# Proxy-id: $pid Federation: $own
 # Ldap auth
-auth_param basic program /usr/lib/squid3/squid_ldap_auth -v 3 -b \"ou=$pid,o=proxyusers,dc=guifi,dc=net\" -H ldaps://$ldap_server/ -f \"uid=%s\" -D \"uid=proxyldap2011,o=proxyusers,dc=guifi,dc=net\" -w \"proxyaproxy2011\"
+auth_param basic program /usr/lib/squid3/$LDAP_AUTH -v 3 -b \"ou=$pid,o=proxyusers,dc=guifi,dc=net\" -H ldaps://$ldap_server/ -f \"uid=%s\" -D \"uid=proxyldap2011,o=proxyusers,dc=guifi,dc=net\" -w \"proxyaproxy2011\"
 auth_param basic credentialsttl 2 hours
 auth_param basic children 5
 " >> /etc/squid3/guifi.conf
@@ -134,11 +144,11 @@ done < $tmp
 echo "$HEADER" > /etc/squid3/guifi.conf
 echo "# Proxy-id: $pid Federation: $own
 # Ldap auth
-auth_param basic program /usr/lib/squid3/squid_ldap_auth -v 3 -b \"o=proxyusers,dc=guifi,dc=net\" -H ldaps://$ldap_server/ -f \"uid=%s\" -D \"uid=proxyldap2011,o=proxyusers,dc=guifi,dc=net\" -w \"proxyaproxy2011\"
+auth_param basic program /usr/lib/squid3/$LDAP_AUTH -v 3 -b \"o=proxyusers,dc=guifi,dc=net\" -H ldaps://$ldap_server/ -f \"uid=%s\" -D \"uid=proxyldap2011,o=proxyusers,dc=guifi,dc=net\" -w \"proxyaproxy2011\"
 auth_param basic credentialsttl 2 hours
 auth_param basic children 5
 # Ldap group auth ( group=proxy-id ou=XXXX)
-external_acl_type ldap-group %LOGIN /usr/lib/squid3/squid_ldap_group -v 3 -b \"o=proxyusers,dc=guifi,dc=net\" -f (&(\"ou=%g\")(\"uid=%u\")) -h ldaps://$ldap_server/ -D \"uid=proxyldap2011,o=proxyusers,dc=guifi,dc=net\" -w \"proxyaproxy2011\"
+external_acl_type ldap-group %LOGIN /usr/lib/squid3/$LDAP_GROUP -v 3 -b \"o=proxyusers,dc=guifi,dc=net\" -f (&(\"ou=%g\")(\"uid=%u\")) -h ldaps://$ldap_server/ -D \"uid=proxyldap2011,o=proxyusers,dc=guifi,dc=net\" -w \"proxyaproxy2011\"
 " >> /etc/squid3/guifi.conf
 
 IFS=","
@@ -152,14 +162,14 @@ do
   if [ $COUNT -lt 40 ]; then
     ACLS="$ACLS $WORD"
   else
-    ACLS="$ACLS\n$ACCESS$G_COUNT"
+    ACLS="$ACLS \n $ACCESS$G_COUNT"
     COUNT=0
     let G_COUNT=G_COUNT+1
-    ACLS="$ACLS\nacl AllowFedOut$G_COUNT external ldap-group $WORD"
+    ACLS="$ACLS \n acl AllowFedOut$G_COUNT external ldap-group $WORD"
   fi
   let COUNT=COUNT+1
 done
-ACLS="$ACLS\n$ACCESS$G_COUNT"
+ACLS="$ACLS \n $ACCESS$G_COUNT"
 echo -e "$ACLS" >> /etc/squid3/guifi.conf
 OFS=$IFS
 
@@ -175,23 +185,16 @@ do
   if [ $COUNT -lt 40 ]; then
     ACLS="$ACLS $WORD"
   else
-    ACLS="$ACLS\n$ACCESS$G_COUNT"
+    ACLS="$ACLS \n $ACCESS$G_COUNT"
     COUNT=0
     let G_COUNT=G_COUNT+1
-    ACLS="$ACLS\nacl DenyFedOut$G_COUNT external ldap-group $WORD"
+    ACLS="$ACLS \n acl DenyFedOut$G_COUNT external ldap-group $WORD"
   fi
   let COUNT=COUNT+1
 done
-ACLS="$ACLS\n$ACCESS$G_COUNT"
+ACLS="$ACLS \n $ACCESS$G_COUNT"
 echo -e "$ACLS" >> /etc/squid3/guifi.conf
 OFS=$IFS
 
 echo -e "$DEFCONF" >> /etc/squid3/guifi.conf
-
-if [ -f /tmp/guifi-proxy3.crontrol ]
-then
-	eval $restart
-else
-        eval $reload
-fi
 
