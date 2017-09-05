@@ -6,6 +6,7 @@ base_url='http://www.guifi.net'
 tmp='/tmp/federation_list'
 ldap_main="ldap.guifi.net"
 ldap_backup="ldap2.guifi.net"
+timestamp=$(date -R)
 #--- END DEFAULT CONFIG ---
 
 #--- LOAD CONFIG FILE ---
@@ -78,12 +79,12 @@ if [ $ldap1 == "up" ]; then
   ldap_server="$ldap_main"
   ldap_KO="false"
 else
-  echo "LDAP main server: $ldap_main is KO!"
+  echo "$timestamp - LDAP main server: $ldap_main is KO!"
   if [ $ldap2 == "up" ]; then
     ldap_server="$ldap_backup"
     ldap_KO="false"
   else
-    echo "LDAP backup server: $ldap_backup is KO!"
+    echo "$timestamp - LDAP backup server: $ldap_backup is KO!"
     # can't connect to ldap servers! probably networking is down, re check at next cron time.
     ldap_KO="true"
   fi
@@ -99,7 +100,7 @@ else
   pidserver="down"
   # can't get new federation file
   if [ $ldap_KO == "true" ]; then
-    echo "LDAP servers: $ldap_main, $ldap_backup and Proxy ID webserver: $base_url are DOWN!! Aborting reload, probably networking is down, re check at next cron time."
+    echo "$timestamp - LDAP servers: $ldap_main, $ldap_backup and Proxy ID webserver: $base_url are DOWN!! Aborting reload, probably networking is down, re check at next cron time."
     exit
   fi
 fi
@@ -197,4 +198,3 @@ echo -e "$ACLS" >> /etc/squid3/guifi.conf
 OFS=$IFS
 
 echo -e "$DEFCONF" >> /etc/squid3/guifi.conf
-
