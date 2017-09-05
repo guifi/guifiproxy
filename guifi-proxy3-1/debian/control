@@ -4,8 +4,8 @@ Priority: optional
 Maintainer: Miquel Martos <miquel.martos@guifi.net>
 Build-Depends: cdbs, debhelper (>= 7.0.50~)
 Standards-Version: 3.8.4
-Vcs-Git: git://gitorious.org/guifi/guifi-proxy-debian.git
-Vcs-Browser: http://git.gitorious.org/guifi/guifi-proxy-debian.git
+Vcs-Git: https://github.com/guifi/guifiproxy.git
+Vcs-Browser: https://github.com/guifi/guifiproxy.git
 
 Package: guifi-proxy3
 Architecture: all
