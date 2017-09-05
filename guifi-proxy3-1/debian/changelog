@@ -1,3 +1,8 @@
+guifi-proxy3 (1.1.39) guifi; urgency=low
+  * Add timestamps to log messages
+  * Update source URLs to Guifi repository on GitHub
+ -- Roger Pueyo Centelles <roger.pueyo@guifi.net>  Tue, 5 Sep 2017 18:15:06 +0200
+
 guifi-proxy3 (1.1.38) guifi; urgency=low
   * Fix post remove script
  -- Miquel Martos <miquel.martos@guifi.net>  Tue, 4 Jul 2014 13:41:04 +0200
