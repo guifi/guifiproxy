@@ -1,10 +1,10 @@
 #!/bin/bash
 
-restart="/usr/sbin/service squid3 restart"
-reload="/usr/sbin/service squid3 reload"
+restart="/usr/sbin/service squid restart"
+reload="/usr/sbin/service squid reload"
 
 
-if [ "$(pidof squid3)" ]
+if [ "$(pidof squid)" ]
 then
   eval $reload
 else

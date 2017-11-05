@@ -10,8 +10,8 @@ Vcs-Browser: https://github.com/guifi/guifiproxy.git
 Package: guifi-proxy3
 Architecture: all
 Pre-Depends: squid3, wget, coreutils, ldap-utils, perl, netcat, ca-certificates
-Conflicts: squid, guifi-proxy
-Replaces: squid, guifi-proxy
+Conflicts: guifi-proxy
+Replaces:  guifi-proxy
 Suggests: sarg
 Description: Guifi.net Proxy federation system
  This package is based on guifi-proxy_0.0.2 package created by the Developer & maintainer Carles Guadall Blancafort <carles@viladelpingui.net>.

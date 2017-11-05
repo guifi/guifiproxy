@@ -17,9 +17,9 @@ set -e
 case "$1" in
     install|upgrade)
         ## if exist custom.conf mv to backup 
-        if [ -e /etc/squid3/custom.conf ]
+        if [ -e /etc/squid/custom.conf ]
         then
-                /bin/mv /etc/squid3/custom.conf /etc/squid3/custom.`date +%y%m%d%H%M`.backup
+                /bin/mv /etc/squid/custom.conf /etc/squid/custom.`date +%y%m%d%H%M`.backup
         fi
         ## if exist old file with users & passwds remove 
         if [ -e /etc/gufi-proxy3/passwd ]

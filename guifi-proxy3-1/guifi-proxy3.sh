@@ -19,23 +19,23 @@ fi
 #--- END LOAD CONFIG FILE ---
 
 
-if [ -f /usr/lib/squid3/squid_ldap_auth ];
+if [ -f /usr/lib/squid/squid_ldap_auth ];
 then
         LDAP_AUTH='squid_ldap_auth'
 else
         LDAP_AUTH='basic_ldap_auth'
 fi
-if [ -f /usr/lib/squid3/squid_ldap_group ];
+if [ -f /usr/lib/squid/squid_ldap_group ];
 then
         LDAP_GROUP='squid_ldap_group'
 else
         LDAP_GROUP='ext_ldap_group_acl'
 fi
 
-HEADER="# /etc/squid3/guifi.conf
+HEADER="# /etc/squid/guifi.conf
 # This file contains the configurations generated during installation
 # The cron daemon, periodically update this configuration for squid. When that happens, this file is deleted and completely regenerates.
-# You should not add custom settings in this file, use the file named /etc/squid3/custom.conf for it.
+# You should not add custom settings in this file, use the file named /etc/squid/custom.conf for it.
 #
 # General"
 
@@ -52,14 +52,14 @@ cache_swap_low 90
 cache_swap_high 95
 maximum_object_size 20480 KB
 # logs
-access_log /var/log/squid3/access.log squid
-cache_log /var/log/squid3/cache.log
+access_log /var/log/squid/access.log squid
+cache_log /var/log/squid/cache.log
 ## special config with postinst
 cache_mem $cache_mem MB
-cache_dir ufs /var/spool/squid3 $cache_size 32 512
+cache_dir ufs /var/spool/squid $cache_size 32 512
 auth_param basic realm $realm
 cache_mgr $manager
-error_directory /usr/share/squid3/errors/$language"
+error_directory /usr/share/squid/errors/$language"
 
 # check if ldap servers are up and running
 if (nc -zw2 $ldap_main 636); then
@@ -120,14 +120,14 @@ group_deny="0"
 while read p1 p2
 do
   if [[ "$own" == "private" ||  "$own" == "out" ]]; then
-    echo "$HEADER" > /etc/squid3/guifi.conf
+    echo "$HEADER" > /etc/squid/guifi.conf
     echo "# Proxy-id: $pid Federation: $own
 # Ldap auth
-auth_param basic program /usr/lib/squid3/$LDAP_AUTH -v 3 -b \"ou=$pid,o=proxyusers,dc=guifi,dc=net\" -H ldaps://$ldap_server/ -f \"uid=%s\" -D \"uid=proxyldap2011,o=proxyusers,dc=guifi,dc=net\" -w \"proxyaproxy2011\"
+auth_param basic program /usr/lib/squid/$LDAP_AUTH -v 3 -b \"ou=$pid,o=proxyusers,dc=guifi,dc=net\" -H ldaps://$ldap_server/ -f \"uid=%s\" -D \"uid=proxyldap2011,o=proxyusers,dc=guifi,dc=net\" -w \"proxyaproxy2011\"
 auth_param basic credentialsttl 2 hours
 auth_param basic children 5
-" >> /etc/squid3/guifi.conf
-    echo "$DEFCONF" >> /etc/squid3/guifi.conf
+" >> /etc/squid/guifi.conf
+    echo "$DEFCONF" >> /etc/squid/guifi.conf
     exit
   else
     # if own proxy accept federated users create federated proxy-id list.
@@ -142,15 +142,15 @@ auth_param basic children 5
 OFS=$IFS
 done < $tmp
 
-echo "$HEADER" > /etc/squid3/guifi.conf
+echo "$HEADER" > /etc/squid/guifi.conf
 echo "# Proxy-id: $pid Federation: $own
 # Ldap auth
-auth_param basic program /usr/lib/squid3/$LDAP_AUTH -v 3 -b \"o=proxyusers,dc=guifi,dc=net\" -H ldaps://$ldap_server/ -f \"uid=%s\" -D \"uid=proxyldap2011,o=proxyusers,dc=guifi,dc=net\" -w \"proxyaproxy2011\"
+auth_param basic program /usr/lib/squid/$LDAP_AUTH -v 3 -b \"o=proxyusers,dc=guifi,dc=net\" -H ldaps://$ldap_server/ -f \"uid=%s\" -D \"uid=proxyldap2011,o=proxyusers,dc=guifi,dc=net\" -w \"proxyaproxy2011\"
 auth_param basic credentialsttl 2 hours
 auth_param basic children 5
 # Ldap group auth ( group=proxy-id ou=XXXX)
-external_acl_type ldap-group %LOGIN /usr/lib/squid3/$LDAP_GROUP -v 3 -b \"o=proxyusers,dc=guifi,dc=net\" -f (&(\"ou=%g\")(\"uid=%u\")) -h ldaps://$ldap_server/ -D \"uid=proxyldap2011,o=proxyusers,dc=guifi,dc=net\" -w \"proxyaproxy2011\"
-" >> /etc/squid3/guifi.conf
+external_acl_type ldap-group %LOGIN /usr/lib/squid/$LDAP_GROUP -v 3 -b \"o=proxyusers,dc=guifi,dc=net\" -f (&(\"ou=%g\")(\"uid=%u\")) -h ldaps://$ldap_server/ -D \"uid=proxyldap2011,o=proxyusers,dc=guifi,dc=net\" -w \"proxyaproxy2011\"
+" >> /etc/squid/guifi.conf
 
 IFS=","
 COUNT=0
@@ -171,7 +171,7 @@ do
   let COUNT=COUNT+1
 done
 ACLS="$ACLS \n $ACCESS$G_COUNT"
-echo -e "$ACLS" >> /etc/squid3/guifi.conf
+echo -e "$ACLS" >> /etc/squid/guifi.conf
 OFS=$IFS
 
 IFS=","
@@ -194,7 +194,8 @@ do
   let COUNT=COUNT+1
 done
 ACLS="$ACLS \n $ACCESS$G_COUNT"
-echo -e "$ACLS" >> /etc/squid3/guifi.conf
+echo -e "$ACLS" >> /etc/squid/guifi.conf
 OFS=$IFS
 
-echo -e "$DEFCONF" >> /etc/squid3/guifi.conf
+echo -e "$DEFCONF" >> /etc/squid/guifi.conf
+

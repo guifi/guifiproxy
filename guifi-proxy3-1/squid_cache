@@ -2,16 +2,16 @@
 #
 /bin/echo ""
 /bin/echo "`date +%y-%m-%d___%k:%M`-----------------------------------------------------------------------------------"
-/usr/sbin/service squid3 stop
-if [ -f /var/spool/squid3_old ]
+/usr/sbin/service squid stop
+if [ -f /var/spool/squid_old ]
 then
-    /bin/rm /var/spool/squid3_old
+    /bin/rm /var/spool/squid_old
 fi
-/bin/mv /var/spool/squid3 /var/spool/squid3_old
-/bin/mkdir /var/spool/squid3
-/bin/chown proxy:proxy /var/spool/squid3
-/usr/sbin/squid3 squid3 -z
-/usr/sbin/service squid3 start
-/bin/rm -Rf /var/spool/squid3_old
+/bin/mv /var/spool/squid /var/spool/squid_old
+/bin/mkdir /var/spool/squid
+/bin/chown proxy:proxy /var/spool/squid
+/usr/sbin/squid squid -z
+/usr/sbin/service squid start
+/bin/rm -Rf /var/spool/squid_old
 #fi
 

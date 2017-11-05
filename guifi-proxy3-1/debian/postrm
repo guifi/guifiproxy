@@ -21,16 +21,16 @@ case "$1" in
                         /bin/rm -rf /etc/guifi-proxy3/
                 fi
 
-		if [ -e /etc/squid3/squid.conf.backup.initial ]; then
+		if [ -e /etc/squid/squid.conf.backup.initial ]; then
 	                echo "Restoring the initial configuration squid.conf.backup.initial ...... .......";
-			mv /etc/squid3/squid.conf.backup.initial /tmp/squid3_squid.conf
+			mv /etc/squid/squid.conf.backup.initial /tmp/squid_squid.conf
 			else
-			grep -Ev 'guifi.conf|custom.conf' /etc/squid3/squid.conf > /tmp/squid3_squid.conf
-			mv /tmp/squid3_squid.conf /etc/squid3/squid.conf
+			grep -Ev 'guifi.conf|custom.conf' /etc/squid/squid.conf > /tmp/squid_squid.conf
+			mv /tmp/squid_squid.conf /etc/squid/squid.conf
 
 		fi
 		echo "Starting the server squid ...... .......";
-		/usr/sbin/service squid3 restart
+		/usr/sbin/service squid restart
 
                 ;;
 
